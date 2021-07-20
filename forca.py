@@ -3,8 +3,8 @@ def jogar():
     print("***Bem vindo ao jogo da Forca!***")
     print("*********************************\n")
 
-    palavra_secreta = "BaNAna".upper()
-    letras_acertadas = ["_", "_", "_", "_", "_", "_"]
+    palavra_secreta = "abacaxi".upper()
+    letras_acertadas = ["_" for letra in palavra_secreta]
 
     enforcou = False
     acertou = False
