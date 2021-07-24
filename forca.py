@@ -1,40 +1,24 @@
 import random
+import funcoes_do_jogo as fdj
 
 def jogar():
-    print("*********************************")
-    print("***Bem vindo ao jogo da Forca!***")
-    print("*********************************\n")
 
-    filename = "C:/Users/alber/Documents/arquivos_TXT/frutas.txt"
-    palavras = []
+    fdj.imprimir_mensagem_de_abertura()
+    palavra_secreta = fdj.carregar_palavra_secreta()
 
-    with open (filename) as arquivo:
-        for linha in arquivo:
-            linha = linha.strip()
-            palavras.append(linha)
-
-    numero = random.randrange(0, len(palavras))
-    palavra_secreta = palavras[numero].upper()
-
-    letras_acertadas = ["_" for letra in palavra_secreta]
+    letras_acertadas = fdj.inicializa_letras_acertadas(palavra_secreta)
+    print(f"{letras_acertadas}\n")
 
     enforcou = False
     acertou = False
     erros = 0
-    
-    print(f"{letras_acertadas}\n")
 
     while (not enforcou and not acertou):
 
-        chute = input("Qual a letra? ")
-        chute = chute.strip().upper()
+        chute = fdj.chute_do_jogador()
 
         if (chute in palavra_secreta):
-            index = 0
-            for letra in palavra_secreta:
-                if (chute == letra):
-                    letras_acertadas[index] = letra
-                index += 1
+            fdj.marca_chute_correto(chute, letras_acertadas, palavra_secreta)
         else:
             erros += 1
             print(f"\nVocê errou! Restam apenas {6 - erros}")
@@ -44,14 +28,12 @@ def jogar():
         print(f"{letras_acertadas}\n")
 
     if (acertou):
-        print("\nPARABENS! VOCÊ GANHOU!")
+        fdj.imprime_mensagem_vencedor()
     else:
-        print("\nVOCÊ PERDEU!")
+        fdj.imprime_mensagem_perdedor()
         print(f"A palavra certa é {palavra_secreta.upper()}")
 
-    print("\n*********************************")
-    print("********** FIM DE JOGO! *********")
-    print("*********************************")
+    fdj.imprimir_mensagem_final()
 
 
 if (__name__ == "__main__"):
