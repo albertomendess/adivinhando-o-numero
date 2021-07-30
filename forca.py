@@ -21,17 +21,16 @@ def jogar():
             fdj.marca_chute_correto(chute, letras_acertadas, palavra_secreta)
         else:
             erros += 1
-            print(f"\nVocê errou! Restam apenas {6 - erros}")
+            fdj.desenha_forca(erros)
 
-        enforcou = erros == 6
+        enforcou = erros == 7
         acertou = "_" not in letras_acertadas
         print(f"{letras_acertadas}\n")
 
     if (acertou):
         fdj.imprime_mensagem_vencedor()
     else:
-        fdj.imprime_mensagem_perdedor()
-        print(f"A palavra certa é {palavra_secreta.upper()}")
+        fdj.imprime_mensagem_perdedor(palavra_secreta)
 
     fdj.imprimir_mensagem_final()
 
